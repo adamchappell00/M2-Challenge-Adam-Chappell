@@ -44,6 +44,7 @@ public class ServiceController {
             throw new IllegalArgumentException("You Must Request a Month between 1 and 12");
         }
     }
+
     @RequestMapping(value="/randomMonth", method= RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public Month getRandomMonth(){
