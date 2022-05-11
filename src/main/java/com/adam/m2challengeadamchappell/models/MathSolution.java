@@ -1,0 +1,51 @@
+package com.adam.m2challengeadamchappell.models;
+
+// Java Imports
+import java.util.Objects;
+
+public class MathSolution {
+    // Fields
+    private Integer operand1;
+    private Integer operand2;
+    private String operation;
+    private String answer;
+
+    // Constructors
+    public MathSolution(){}
+
+    public MathSolution(Integer operand1, Integer operand2, String operation, String answer) {
+        this.operand1 = operand1;
+        this.operand2 = operand2;
+        this.operation = operation;
+        this.answer = answer;
+    }
+
+    // Unique Methods : NONE
+
+    // Standard Methods - Equals, HashCode, toString
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MathSolution that = (MathSolution) o;
+        return Objects.equals(operand1, that.operand1) && Objects.equals(operand2, that.operand2) && Objects.equals(operation, that.operation) && Objects.equals(answer, that.answer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operand1, operand2, operation, answer);
+    }
+
+    // Standard Methods - Getters & Setters
+    public Integer getOperand1() {return operand1;}
+    public void setOperand1(Integer operand1) {this.operand1 = operand1;}
+
+    public Integer getOperand2() {return operand2;}
+    public void setOperand2(Integer operand2) {this.operand2 = operand2;}
+
+    public String getOperation() {return operation;}
+    public void setOperation(String operation) {this.operation = operation;}
+
+    public String getAnswer() {return answer;}
+    public void setAnswer(String answer) {this.answer = answer;}
+}
