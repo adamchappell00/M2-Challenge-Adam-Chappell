@@ -1,9 +1,5 @@
 package com.adam.m2challengeadamchappell.models;
 
-// Other Imports
-import com.sun.istack.internal.NotNull;
-
-// Java Imports
 import java.util.Objects;
 
 public class MathSolution {
@@ -17,19 +13,16 @@ public class MathSolution {
     // Constructors
     public MathSolution(){
     }
-
     public MathSolution(Integer operand1, Integer operand2){
         this.operand1 = operand1;
         this.operand2 = operand2;
     }
-
     public MathSolution(Integer operand1, Integer operand2, String operation, Integer answer) {
         this.operand1 = operand1;
         this.operand2 = operand2;
         this.operation = operation;
         this.answer = answer;
     }
-
     // Unique Methods : NONE
 
     // Standard Methods - Equals, HashCode, toString

@@ -7,12 +7,10 @@ import com.adam.m2challengeadamchappell.models.Month;
 // Java Imports
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.Valid;
 
 // Spring Imports
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 
 
 @RestController
@@ -39,7 +37,6 @@ public class ServiceController {
     @RequestMapping(value="/month/{monthNumber}", method= RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public Month getMonthByNumber(@PathVariable int monthNumber) {
-
         // Range Check for Exceptions
         if(monthNumber >= 1 && monthNumber <= 12){
             // Shift from Month Number to Index
@@ -63,7 +60,6 @@ public class ServiceController {
         if(mathSolution.getOperand1() == null || mathSolution.getOperand2() == null){
             throw new IllegalArgumentException("You must include both operand values in your request, and both must be numeric values.");
         }
-
         mathSolution.setOperation("add");
         mathSolution.setAnswer(mathSolution.getOperand1() + mathSolution.getOperand2());
         return mathSolution;
@@ -104,6 +100,5 @@ public class ServiceController {
         mathSolution.setAnswer(mathSolution.getOperand1() / mathSolution.getOperand2());
         return mathSolution;
     }
-
 
 }

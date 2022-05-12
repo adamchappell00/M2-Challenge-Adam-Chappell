@@ -1,11 +1,10 @@
 package com.adam.m2challengeadamchappell.models;
 
-// Java Imports
+
 import java.util.Objects;
 
 public class Month {
 
-    // Fields
     private Integer number;
     private String name;
 
@@ -16,9 +15,7 @@ public class Month {
         this.number = number;
         this.name = name;
     }
-
     // Unique Methods : NONE
-
     // Standard Methods - Equals, HashCode, toString
     @Override
     public boolean equals(Object o) {
@@ -27,13 +24,6 @@ public class Month {
         Month month = (Month) o;
         return Objects.equals(number, month.number) && Objects.equals(name, month.name);
     }
-    // Standard Methods - Getters & Setters
-    public Integer getNumber() {return number;}
-    public void setNumber(Integer number) {this.number = number;}
-
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
-
     @Override
     public int hashCode() {
         return Objects.hash(number, name);
@@ -46,4 +36,10 @@ public class Month {
                 ", name='" + name + '\'' +
                 '}';
     }
+    // Standard Methods - Getters & Setters
+    public Integer getNumber() {return number;}
+    public void setNumber(Integer number) {this.number = number;}
+
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
 }
