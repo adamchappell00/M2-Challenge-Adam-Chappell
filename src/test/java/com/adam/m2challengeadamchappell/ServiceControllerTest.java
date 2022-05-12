@@ -178,7 +178,7 @@ public class ServiceControllerTest {
         // Arrange - Three solutions for Input and Two Expected Outputs for Comparison
         MathSolution solution1 = new MathSolution(4,2);
         String inputSolution1 = mapper.writeValueAsString(solution1);
-        MathSolution solution2 = new MathSolution(18,3);
+        MathSolution solution2 = new MathSolution(18,6);
         String inputSolution2 = mapper.writeValueAsString(solution2);
         // Third input and solution will expect a decimal point remainder to be trimmed from the Integer
         MathSolution solution3 = new MathSolution(12,5);
@@ -186,7 +186,7 @@ public class ServiceControllerTest {
 
         MathSolution outputSolution1 = new MathSolution(4,2,"divide", 2);
         String expectedOutput1 = mapper.writeValueAsString(outputSolution1);
-        MathSolution outputSolution2 = new MathSolution(18,3,"divide", 3);
+        MathSolution outputSolution2 = new MathSolution(18,6,"divide", 3);
         String expectedOutput2 = mapper.writeValueAsString(outputSolution2);
         MathSolution outputSolution3 = new MathSolution(12,5,"divide", 2);
         String expectedOutput3 = mapper.writeValueAsString(outputSolution3);

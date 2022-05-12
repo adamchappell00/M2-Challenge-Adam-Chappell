@@ -1,6 +1,7 @@
 package com.adam.m2challengeadamchappell.controllers;
 
 // Project Imports
+import com.adam.m2challengeadamchappell.models.MathSolution;
 import com.adam.m2challengeadamchappell.models.Month;
 
 // Java Imports
@@ -52,5 +53,38 @@ public class ServiceController {
         int monthToGet = (int) ((Math.random() * 12 ));
         return allMonths.get(monthToGet);
     }
+
+    @RequestMapping(value="/add", method= RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public MathSolution doAdditionMathSolution(@RequestBody MathSolution mathSolution){
+        mathSolution.setOperation("add");
+        mathSolution.setAnswer(mathSolution.getOperand1() + mathSolution.getOperand2());
+        return mathSolution;
+    }
+
+    @RequestMapping(value="/subtract", method= RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public MathSolution doSubtractionMathSolution(@RequestBody MathSolution mathSolution){
+        mathSolution.setOperation("subtract");
+        mathSolution.setAnswer(mathSolution.getOperand1() - mathSolution.getOperand2());
+        return mathSolution;
+    }
+
+    @RequestMapping(value="/multiply", method= RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public MathSolution doMultiplicationMathSolution(@RequestBody MathSolution mathSolution){
+        mathSolution.setOperation("multiply");
+        mathSolution.setAnswer(mathSolution.getOperand1() * mathSolution.getOperand2());
+        return mathSolution;
+    }
+
+    @RequestMapping(value="/divide", method= RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public MathSolution doDivisionMathSolution(@RequestBody MathSolution mathSolution){
+        mathSolution.setOperation("divide");
+        mathSolution.setAnswer(mathSolution.getOperand1() / mathSolution.getOperand2());
+        return mathSolution;
+    }
+
 
 }
