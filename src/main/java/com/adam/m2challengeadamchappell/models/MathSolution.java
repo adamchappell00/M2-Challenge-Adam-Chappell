@@ -1,5 +1,8 @@
 package com.adam.m2challengeadamchappell.models;
 
+// Other Imports
+import com.sun.istack.internal.NotNull;
+
 // Java Imports
 import java.util.Objects;
 
@@ -7,11 +10,13 @@ public class MathSolution {
     // Fields
     private Integer operand1;
     private Integer operand2;
+
     private String operation;
     private Integer answer;
 
     // Constructors
-    public MathSolution(){}
+    public MathSolution(){
+    }
 
     public MathSolution(Integer operand1, Integer operand2){
         this.operand1 = operand1;

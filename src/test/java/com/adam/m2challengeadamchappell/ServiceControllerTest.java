@@ -84,7 +84,7 @@ public class ServiceControllerTest {
     }
 
     @Test
-    public void shouldReturnAdditionSolutionWithGoodOperands() throws Exception {
+    public void shouldReturnAdditionWithGoodOperands() throws Exception {
         // Arrange - Two solutions for Input and Two Expected Outputs for Comparison
         MathSolution solution1 = new MathSolution(2,3);
         String inputSolution1 = mapper.writeValueAsString(solution1);
@@ -112,9 +112,44 @@ public class ServiceControllerTest {
                 .andExpect(status().isOk())                     // Assert HttpStatus 200 Response
                 .andExpect(content().json(expectedOutput2));    // Assert the response body matches expectation
     }
+    @Test
+    public void shouldReturnUnprocessableForAdditionWithBadOperands() throws Exception {
+        // Arrange
+        // Solution 1 - Only First Operand Included
+        MathSolution solution1 = new MathSolution();
+        solution1.setOperand1(2);
+        String inputSolution1 = mapper.writeValueAsString(solution1);
+        // Solution 2 - No Operands Included
+        MathSolution solution2 = new MathSolution();
+        String inputSolution2 = mapper.writeValueAsString(solution2);
+        // Solution 3 - Non Numeric Attempt
+        String inputSolution3 = "{\"operand1\":2,\"operand2\":\"tacos\"}";
+        System.out.println(inputSolution3);
+        // Act - Perform Request 1
+        mockMvc.perform(post("/add")
+                        .content(inputSolution1)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+        // Act - Perform Request 2
+        mockMvc.perform(post("/add")
+                        .content(inputSolution2)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+        // Act - Perform Request 3
+        mockMvc.perform(post("/add")
+                        .content(inputSolution3)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+    }
 
     @Test
-    public void shouldReturnSubtractionSolutionWithGoodOperands() throws Exception {
+    public void shouldReturnSubtractionWithGoodOperands() throws Exception {
         // Arrange - Two solutions for Input and Two Expected Outputs for Comparison
         MathSolution solution1 = new MathSolution(5,2);
         String inputSolution1 = mapper.writeValueAsString(solution1);
@@ -142,9 +177,44 @@ public class ServiceControllerTest {
                 .andExpect(status().isOk())                     // Assert HttpStatus 200 Response
                 .andExpect(content().json(expectedOutput2));    // Assert the response body matches expectation
     }
+    @Test
+    public void shouldReturnUnprocessableForSubtractionWithBadOperands() throws Exception {
+        // Arrange
+        // Solution 1 - Only First Operand Included
+        MathSolution solution1 = new MathSolution();
+        solution1.setOperand1(2);
+        String inputSolution1 = mapper.writeValueAsString(solution1);
+        // Solution 2 - No Operands Included
+        MathSolution solution2 = new MathSolution();
+        String inputSolution2 = mapper.writeValueAsString(solution2);
+        // Solution 3 - Non Numeric Attempt
+        String inputSolution3 = "{\"operand1\":2,\"operand2\":\"tacos\"}";
+        System.out.println(inputSolution3);
+        // Act - Perform Request 1
+        mockMvc.perform(post("/subtract")
+                        .content(inputSolution1)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+        // Act - Perform Request 2
+        mockMvc.perform(post("/subtract")
+                        .content(inputSolution2)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+        // Act - Perform Request 3
+        mockMvc.perform(post("/subtract")
+                        .content(inputSolution3)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+    }
 
     @Test
-    public void shouldReturnMultiplicationSolutionWithGoodOperands() throws Exception {
+    public void shouldReturnMultiplicationWithGoodOperands() throws Exception {
         // Arrange - Two solutions for Input and Two Expected Outputs for Comparison
         MathSolution solution1 = new MathSolution(3,2);
         String inputSolution1 = mapper.writeValueAsString(solution1);
@@ -174,7 +244,43 @@ public class ServiceControllerTest {
     }
 
     @Test
-    public void shouldReturnDivisionSolutionWithGoodOperands() throws Exception {
+    public void shouldReturnUnprocessableForMultiplicationWithBadOperands() throws Exception {
+        // Arrange
+        // Solution 1 - Only First Operand Included
+        MathSolution solution1 = new MathSolution();
+        solution1.setOperand1(5);
+        String inputSolution1 = mapper.writeValueAsString(solution1);
+        // Solution 2 - No Operands Included
+        MathSolution solution2 = new MathSolution();
+        String inputSolution2 = mapper.writeValueAsString(solution2);
+        // Solution 3 - Non Numeric Attempt
+        String inputSolution3 = "{\"operand1\":2,\"operand2\":\"potato\"}";
+        System.out.println(inputSolution3);
+        // Act - Perform Request 1
+        mockMvc.perform(post("/multiply")
+                        .content(inputSolution1)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+        // Act - Perform Request 2
+        mockMvc.perform(post("/multiply")
+                        .content(inputSolution2)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+        // Act - Perform Request 3
+        mockMvc.perform(post("/multiply")
+                        .content(inputSolution3)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+    }
+
+    @Test
+    public void shouldReturnDivisionWithGoodOperands() throws Exception {
         // Arrange - Three solutions for Input and Two Expected Outputs for Comparison
         MathSolution solution1 = new MathSolution(4,2);
         String inputSolution1 = mapper.writeValueAsString(solution1);
@@ -214,5 +320,41 @@ public class ServiceControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())                     // Assert HttpStatus 200 Response
                 .andExpect(content().json(expectedOutput3));    // Assert the response body matches expectation
+    }
+
+    @Test
+    public void shouldReturnUnprocessableForDivisionWithBadOperands() throws Exception {
+        // Arrange
+        // Solution 1 - Only First Operand Included
+        MathSolution solution1 = new MathSolution();
+        solution1.setOperand1(5);
+        String inputSolution1 = mapper.writeValueAsString(solution1);
+        // Solution 2 - No Operands Included
+        MathSolution solution2 = new MathSolution();
+        String inputSolution2 = mapper.writeValueAsString(solution2);
+        // Solution 3 - Non Numeric Attempt
+        String inputSolution3 = "{\"operand1\":\"pizza\",\"operand2\":42}";
+        System.out.println(inputSolution3);
+        // Act - Perform Request 1
+        mockMvc.perform(post("/divide")
+                        .content(inputSolution1)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+        // Act - Perform Request 2
+        mockMvc.perform(post("/divide")
+                        .content(inputSolution2)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+        // Act - Perform Request 3
+        mockMvc.perform(post("/divide")
+                        .content(inputSolution3)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
     }
 }

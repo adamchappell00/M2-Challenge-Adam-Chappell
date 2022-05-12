@@ -7,10 +7,13 @@ import com.adam.m2challengeadamchappell.models.Month;
 // Java Imports
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.Valid;
 
 // Spring Imports
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+
 
 @RestController
 public class ServiceController {
@@ -57,6 +60,10 @@ public class ServiceController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public MathSolution doAdditionMathSolution(@RequestBody MathSolution mathSolution){
+        if(mathSolution.getOperand1() == null || mathSolution.getOperand2() == null){
+            throw new IllegalArgumentException("You must include both operand values in your request, and both must be numeric values.");
+        }
+
         mathSolution.setOperation("add");
         mathSolution.setAnswer(mathSolution.getOperand1() + mathSolution.getOperand2());
         return mathSolution;
@@ -65,6 +72,9 @@ public class ServiceController {
     @RequestMapping(value="/subtract", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public MathSolution doSubtractionMathSolution(@RequestBody MathSolution mathSolution){
+        if(mathSolution.getOperand1() == null || mathSolution.getOperand2() == null){
+            throw new IllegalArgumentException("You must include both operand values in your request, and both must be numeric values.");
+        }
         mathSolution.setOperation("subtract");
         mathSolution.setAnswer(mathSolution.getOperand1() - mathSolution.getOperand2());
         return mathSolution;
@@ -73,6 +83,9 @@ public class ServiceController {
     @RequestMapping(value="/multiply", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public MathSolution doMultiplicationMathSolution(@RequestBody MathSolution mathSolution){
+        if(mathSolution.getOperand1() == null || mathSolution.getOperand2() == null){
+            throw new IllegalArgumentException("You must include both operand values in your request, and both must be numeric values.");
+        }
         mathSolution.setOperation("multiply");
         mathSolution.setAnswer(mathSolution.getOperand1() * mathSolution.getOperand2());
         return mathSolution;
