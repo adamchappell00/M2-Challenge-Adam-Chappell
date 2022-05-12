@@ -1,0 +1,261 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /subtract:
+    post:
+      description: Takes a POST method with a JSON Request Body with a valid Operand1 and Operand2 value, will return Both Operands, the Mathematic Operation Name (subtract), as well as the answer value. Invalid (non-numeric) or missing (null) body values will return Unprocessable Entity with Error Message.
+      tags:
+        - service-controller
+      operationId: doSubtractionMathSolution
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolution'
+            example:
+              operand1: 5
+              operand2: 2
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolution'
+              example:
+                operand1: 5
+                operand2: 2
+                operation: subtract
+                answer: 3
+                
+        '422':
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CustomErrorResponse'
+              example:
+                errorMessage: You must include both operand values in your request, and both must be numeric values.
+                errorStatus: 422
+                errorCode: 422 UNPROCESSABLE_ENTITY
+                timestamp: '2022-05-12T17:24:03.637'
+                
+  /multiply:
+    post:
+      description: Takes a POST method with a JSON Request Body with a valid Operand1 and Operand2 value, will return Both Operands, the Mathematic Operation Name (multiply), as well as the answer value. Invalid (non-numeric) or missing (null) body values will return Unprocessable Entity with Error Message.
+      tags:
+        - service-controller
+      operationId: doMultiplicationMathSolution
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolution'
+            example:
+              operand1: 4
+              operand2: 3
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolution'
+              example:
+                operand1: 4
+                operand2: 3
+                operation: multiply
+                answer: 12
+                
+        '422':
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CustomErrorResponse'
+              example:
+                errorMessage: You must include both operand values in your request, and both must be numeric values.
+                errorStatus: 422
+                errorCode: 422 UNPROCESSABLE_ENTITY
+                timestamp: '2022-05-12T17:24:41.251'
+                
+  /divide:
+    post:
+      description: Takes a POST method with a JSON Request Body with a valid Operand1 and Operand2 value, will return Both Operands, the Mathematic Operation Name (divide), as well as the answer value. Invalid (non-numeric) or missing (null) body values, as well as use of 0 for operand2, will return Unprocessable Entity with Error Message.
+      tags:
+        - service-controller
+      operationId: doDivisionMathSolution
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolution'
+            example:
+              operand1: 8
+              operand2: 2
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolution'
+              example:
+                operand1: 8
+                operand2: 2
+                operation: divide
+                answer: 4
+                
+        '422':
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CustomErrorResponse'
+              example:
+                errorMessage: Operand 2 May not be zero for division.
+                errorStatus: 422
+                errorCode: 422 UNPROCESSABLE_ENTITY
+                timestamp: '2022-05-12T17:57:34.614'
+                
+                
+  /add:
+    post:
+      description: Takes a POST method with a JSON Request Body with a valid Operand1 and Operand2 value, will return Both Operands, the Mathematic Operation Name (add), as well as the answer value. Invalid (non-numeric) or missing (null) request body values will return Unprocessable Entity with Error Message.
+      tags:
+        - service-controller
+      operationId: doAdditionMathSolution
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolution'
+            example:
+                operand1: 3
+                operand2: 2
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolution'
+              example:
+                operand1: 3
+                operand2: 2
+                operation: add
+                answer: 5
+                
+        '422':
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CustomErrorResponse'
+              example:
+                errorMessage: You must include both operand values in your request, and both must be numeric values.
+                errorStatus: 422
+                errorCode: 422 UNPROCESSABLE_ENTITY
+                timestamp: '2022-05-12T17:24:41.251'
+                
+                
+  /randomMonth:
+    get:
+      description: Takes a GET method with no Request Body and will return a month name and month number in JSON.
+      tags:
+        - service-controller
+      operationId: getRandomMonth
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Month'
+              example:
+                number: 3
+                name: March
+
+  /month/{monthNumber}:
+    get:
+      description: Takes a GET method with a numeric pathvariable (represented as {monthNumber} inthe path description). The response is a returned month name and month number in JSON for the month corresponding to the number passed (ie. January for /month/1, or July for /month/7). Values other than 1 through 12 will return an Error.
+      tags:
+        - service-controller
+      operationId: getMonthByNumber
+      parameters:
+        - name: monthNumber
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Month'
+              example:
+                number: 7
+                name: July
+                
+        '422':
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CustomErrorResponse'
+              example:
+                errorMessage: You Must Request a Month between 1 and 12
+                errorStatus: 422
+                errorCode: 422 UNPROCESSABLE_ENTITY
+                timestamp: '2022-05-12T17:52:38.9'
+                
+components:
+  schemas:
+    CustomErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        errorStatus:
+          type: integer
+          format: int32
+        errorCode:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    MathSolution:
+      type: object
+      properties:
+        operand1: 
+          type: integer
+          format: int32
+        operand2: 
+          type: integer
+          format: int32
+        operation:
+          type: string
+        answer:
+          type: integer
+          format: int32
+    Month:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        name:
+          type: string
+        
