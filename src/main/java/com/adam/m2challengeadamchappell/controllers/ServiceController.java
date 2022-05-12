@@ -94,6 +94,12 @@ public class ServiceController {
     @RequestMapping(value="/divide", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public MathSolution doDivisionMathSolution(@RequestBody MathSolution mathSolution){
+        if(mathSolution.getOperand1() == null || mathSolution.getOperand2() == null){
+            throw new IllegalArgumentException("You must include both operand values in your request, and both must be numeric values.");
+        }
+        if(mathSolution.getOperand2() == 0){
+            throw new IllegalArgumentException("Operand 2 May not be zero for division.");
+        }
         mathSolution.setOperation("divide");
         mathSolution.setAnswer(mathSolution.getOperand1() / mathSolution.getOperand2());
         return mathSolution;

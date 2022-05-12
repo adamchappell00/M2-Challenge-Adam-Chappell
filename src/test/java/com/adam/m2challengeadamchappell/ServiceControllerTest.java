@@ -357,4 +357,21 @@ public class ServiceControllerTest {
                 .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
 
     }
+
+    @Test
+    public void shouldReturnUnprocessableForDivisionWithZeroForOperandTwo() throws Exception {
+        // Arrange
+        // Solution - Second Operand is Zero
+        MathSolution solution1 = new MathSolution(5,0);
+        String inputSolution1 = mapper.writeValueAsString(solution1);
+
+        // Act - Perform Request
+        mockMvc.perform(post("/divide")
+                        .content(inputSolution1)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());       // Assert HttpStatus 422 Response - Unprocessable Entity
+
+
+    }
 }
