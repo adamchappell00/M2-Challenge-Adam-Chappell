@@ -13,14 +13,27 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.xml.bind.ValidationException;
+
 
 @RestControllerAdvice
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(value = IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<CustomErrorResponse> handleWrongIdInUpdate(IllegalArgumentException e) {
-        CustomErrorResponse error = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY, e.getMessage());
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ResponseEntity<CustomErrorResponse> handleWrongIdInUpdate(IllegalArgumentException iae) {
+        CustomErrorResponse error = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY, iae.getMessage());
+        error.setErrorStatus((HttpStatus.UNPROCESSABLE_ENTITY.value()));
+        error.setTimestamp(LocalDateTime.now());
+        ResponseEntity<CustomErrorResponse> responseEntity = new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+        return responseEntity;
+
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ResponseEntity<CustomErrorResponse> handleValidationError(ValidationException ve) {
+        CustomErrorResponse error = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY, ve.getMessage());
         error.setErrorStatus((HttpStatus.UNPROCESSABLE_ENTITY.value()));
         error.setTimestamp(LocalDateTime.now());
         ResponseEntity<CustomErrorResponse> responseEntity = new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
