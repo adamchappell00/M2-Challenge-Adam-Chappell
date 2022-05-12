@@ -8,12 +8,17 @@ public class MathSolution {
     private Integer operand1;
     private Integer operand2;
     private String operation;
-    private String answer;
+    private Integer answer;
 
     // Constructors
     public MathSolution(){}
 
-    public MathSolution(Integer operand1, Integer operand2, String operation, String answer) {
+    public MathSolution(Integer operand1, Integer operand2){
+        this.operand1 = operand1;
+        this.operand2 = operand2;
+    }
+
+    public MathSolution(Integer operand1, Integer operand2, String operation, Integer answer) {
         this.operand1 = operand1;
         this.operand2 = operand2;
         this.operation = operation;
@@ -46,6 +51,6 @@ public class MathSolution {
     public String getOperation() {return operation;}
     public void setOperation(String operation) {this.operation = operation;}
 
-    public String getAnswer() {return answer;}
-    public void setAnswer(String answer) {this.answer = answer;}
+    public Integer getAnswer() {return answer;}
+    public void setAnswer(Integer answer) {this.answer = answer;}
 }
