@@ -4,7 +4,7 @@ info:
   version: v0
 servers:
   - url: http://localhost:8080
-    description: Generated server url
+    description: Our base domain which sets the base URL for all methods below, allowing users to take advantages of our APIs via external requet to the endpoints described below.
 paths:
   /subtract:
     post:
